@@ -13,7 +13,7 @@ export default function Footer() {
               <h2 className="text-2xl font-bold text-white">Neurotone</h2>
             </div>
             <p className="mt-2 text-white/80">
-              Early detection of dementia and Parkinson's through voice analysis.
+              Early detection of dementia and Parkinson&apos;s through voice analysis.
             </p>
           </div>
           

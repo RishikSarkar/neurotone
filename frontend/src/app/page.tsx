@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -18,7 +17,7 @@ export default function Home() {
                 <span className="block">Detect early signs of cognitive decline</span>
               </h1>
               <p className="mt-3 text-base text-white/80 sm:mt-5 sm:text-lg md:mt-5 md:text-xl">
-                Using voice analysis to detect early-stage dementia and Parkinson's before symptoms become visibly concerning.
+                Using voice analysis to detect early-stage dementia and Parkinson&apos;s before symptoms become visibly concerning.
               </p>
               <div className="mt-8 sm:mt-10">
                 <Link
@@ -66,7 +65,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-medium text-white">Early Intervention</h3>
               <p className="mt-2 text-base text-white/70">
-                Catch dementia or Parkinson's at a point where new therapies can still be effective.
+                Catch dementia or Parkinson&apos;s at a point where new therapies can still be effective.
               </p>
             </div>
             
