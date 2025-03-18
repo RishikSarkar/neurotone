@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --primary-blue: #1a3a5f;
+  --secondary-blue: #0f2744;
+  --accent-blue: #4a6fa5;
+}
+
+body {
+  color: white;
+  background: linear-gradient(to bottom right, var(--primary-blue), var(--secondary-blue));
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+
+.brand-gradient {
+  background: linear-gradient(to bottom right, var(--primary-blue), var(--secondary-blue));
+}
+
+.neurotone-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
