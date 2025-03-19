@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen pt-16">
       <Navbar />
       
       {/* Hero Section */}
@@ -21,19 +21,19 @@ export default function Home() {
               </p>
               <div className="mt-8 sm:mt-10">
                 <div className="group relative inline-block">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-sm opacity-25 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
                   <Link
                     href="/signup"
-                    className="relative px-6 py-3 bg-white rounded-md inline-flex items-center font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                    className="relative px-6 py-3 bg-white rounded-xl inline-flex items-center font-medium text-gray-800"
                   >
                     Get Started
                   </Link>
                 </div>
                 <div className="group relative inline-block ml-4">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-sm opacity-25 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
                   <Link
                     href="#how-it-works"
-                    className="relative px-6 py-3 bg-white rounded-md inline-flex items-center font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                    className="relative px-6 py-3 bg-white rounded-xl inline-flex items-center font-medium text-gray-800"
                   >
                     Learn more
                   </Link>
@@ -41,7 +41,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-full max-w-md h-96 bg-blue-teal/10 rounded-lg flex items-center justify-center shadow-lg border border-primary-teal/30">
+              <div className="w-full max-w-md h-96 bg-blue-teal/10 rounded-lg flex items-center justify-center">
                 <div className="text-medium-blue text-xl">Voice Waveform Visualization</div>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-6 border border-primary-teal/20">
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6">
               <div className="w-12 h-12 bg-primary-teal/20 rounded-md flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medium-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -76,7 +76,7 @@ export default function Home() {
             </div>
             
             {/* Feature 2 */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-6 border border-primary-teal/20">
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6">
               <div className="w-12 h-12 bg-primary-teal/20 rounded-md flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medium-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -89,7 +89,7 @@ export default function Home() {
             </div>
             
             {/* Feature 3 */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-6 border border-primary-teal/20">
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6">
               <div className="w-12 h-12 bg-primary-teal/20 rounded-md flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-medium-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -176,10 +176,10 @@ export default function Home() {
             </p>
             <div className="mt-8">
               <div className="group relative inline-block">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-sm opacity-25 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
                 <Link
                   href="/signup"
-                  className="relative px-6 py-3 bg-white rounded-md inline-flex items-center font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                  className="relative px-6 py-3 bg-white rounded-xl inline-flex items-center font-medium text-gray-800"
                 >
                   Get Started
                 </Link>
