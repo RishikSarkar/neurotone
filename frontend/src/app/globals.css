@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --primary-blue: #1a3a5f;
-  --secondary-blue: #0f2744;
-  --accent-blue: #4a6fa5;
+  --primary-teal: #9bbab5;
+  --dark-blue: #061a35;
+  --medium-teal: #7FA69F;
+  --blue-teal: #568293;
+  --medium-blue: #123c68;
+  --bg-color: #f5f7f8;
+  --text-color: #2c3e50;
 }
 
 body {
-  color: white;
-  background: linear-gradient(to bottom right, var(--primary-blue), var(--secondary-blue));
+  color: var(--text-color);
+  background-color: var(--bg-color);
   min-height: 100vh;
 }
 
@@ -18,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-gradient {
-  background: linear-gradient(to bottom right, var(--primary-blue), var(--secondary-blue));
+  background: linear-gradient(to right, var(--primary-teal), var(--medium-blue));
 }
 
 .neurotone-container {
@@ -27,4 +31,24 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(to right, var(--primary-teal), var(--medium-blue));
+  border-radius: 0.5rem;
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(5px);
+  transition: opacity 0.3s ease;
+}
+
+.glow-effect:hover::before {
+  opacity: 0.8;
 }
