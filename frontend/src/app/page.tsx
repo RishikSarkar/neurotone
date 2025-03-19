@@ -24,13 +24,13 @@ export default function Home() {
               </p>
               <div className="mt-8 sm:mt-10 flex gap-4">
                 <Link
-                  href="/signup"
+                  href="/dashboard"
                   className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
                 >
                   Get Started
                 </Link>
                 <Link
-                  href="#how-it-works"
+                  href="/dashboard"
                   className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
                 >
                   Learn more
@@ -171,7 +171,7 @@ export default function Home() {
             </p>
             <div className="mt-8">
               <Link
-                href="/signup"
+                href="/dashboard"
                 className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
               >
                 Get Started

@@ -26,25 +26,25 @@ export default function Navbar() {
               About
             </Link>
             <Link
-              href="/pricing"
+              href="/dashboard"
               className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
             >
-              Pricing
+              Dashboard
             </Link>
             <Link
-              href="/contact"
+              href="/dashboard"
               className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
             >
               Contact
             </Link>
             <Link
-              href="/login"
+              href="/dashboard"
               className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
             >
               Log in
             </Link>
             <Link
-              href="/signup"
+              href="/dashboard"
               className="inline-flex items-center px-5 py-2.5 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto] text-sm sm:text-base"
             >
               Sign Up
@@ -83,26 +83,26 @@ export default function Navbar() {
               About
             </Link>
             <Link
-              href="/pricing"
+              href="/dashboard"
               className="block px-3 py-2 rounded-2xl text-base font-medium text-gray-800 hover:bg-gray-100 hover:border-none transition-colors duration-200"
             >
-              Pricing
+              Dashboard
             </Link>
             <Link
-              href="/contact"
+              href="/dashboard"
               className="block px-3 py-2 rounded-2xl text-base font-medium text-gray-800 hover:bg-gray-100 hover:border-none transition-colors duration-200"
             >
               Contact
             </Link>
             <Link
-              href="/login"
+              href="/dashboard"
               className="block px-3 py-2 rounded-2xl text-base font-medium text-gray-800 hover:bg-gray-100 hover:border-none transition-colors duration-200"
             >
               Log in
             </Link>
             <div className="p-3">
               <Link
-                href="/signup"
+                href="/dashboard"
                 className="block w-full text-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl text-base font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
               >
                 Sign up
