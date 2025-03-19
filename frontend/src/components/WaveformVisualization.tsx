@@ -147,6 +147,7 @@ export default function WaveformVisualization() {
     requestIdRef.current = requestAnimationFrame(animate);
   };
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     requestIdRef.current = requestAnimationFrame(animate);
     
@@ -154,9 +155,6 @@ export default function WaveformVisualization() {
       cancelAnimationFrame(requestIdRef.current);
     };
   }, []);
-  
-  // For the ESLint warning, add this comment to suppress it
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   
   return (
     <canvas 
