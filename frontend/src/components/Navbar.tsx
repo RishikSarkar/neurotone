@@ -46,12 +46,15 @@ export default function Navbar() {
             >
               Log in
             </Link>
-            <Link
-              href="/signup"
-              className="glow-effect ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-medium-blue hover:bg-dark-blue"
-            >
-              Sign up
-            </Link>
+            <div className="group relative ml-4 inline-block">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+              <Link
+                href="/signup"
+                className="relative px-4 py-2 bg-white rounded-md inline-flex items-center text-sm font-medium text-medium-blue shadow-sm hover:bg-white/90"
+              >
+                Sign up
+              </Link>
+            </div>
           </div>
           
           <div className="flex items-center md:hidden">
@@ -103,12 +106,17 @@ export default function Navbar() {
             >
               Log in
             </Link>
-            <Link
-              href="/signup"
-              className="glow-effect block w-full text-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-medium-blue hover:bg-dark-blue"
-            >
-              Sign up
-            </Link>
+            <div className="p-3">
+              <div className="group relative w-full">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                <Link
+                  href="/signup"
+                  className="relative w-full block text-center px-4 py-2 bg-white rounded-md text-base font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                >
+                  Sign up
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -20,18 +20,24 @@ export default function Home() {
                 Using voice analysis to detect early-stage dementia and Parkinson&apos;s before symptoms become visibly concerning.
               </p>
               <div className="mt-8 sm:mt-10">
-                <Link
-                  href="/signup"
-                  className="glow-effect inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-medium-blue hover:bg-dark-blue mr-4"
-                >
-                  Get Started
-                </Link>
-                <Link
-                  href="#how-it-works"
-                  className="glow-effect inline-flex items-center px-6 py-3 border border-primary-teal text-base font-medium rounded-md text-medium-blue bg-transparent hover:bg-primary-teal/10"
-                >
-                  Learn more
-                </Link>
+                <div className="group relative inline-block">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                  <Link
+                    href="/signup"
+                    className="relative px-6 py-3 bg-white rounded-md inline-flex items-center font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                  >
+                    Get Started
+                  </Link>
+                </div>
+                <div className="group relative inline-block ml-4">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                  <Link
+                    href="#how-it-works"
+                    className="relative px-6 py-3 bg-white rounded-md inline-flex items-center font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                  >
+                    Learn more
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="flex justify-center">
@@ -169,12 +175,15 @@ export default function Home() {
               Early detection leads to better outcomes. Sign up for Neurotone now.
             </p>
             <div className="mt-8">
-              <Link
-                href="/signup"
-                className="glow-effect inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-medium-blue hover:bg-dark-blue"
-              >
-                Get Started
-              </Link>
+              <div className="group relative inline-block">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary-teal to-medium-blue rounded-md blur opacity-30 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+                <Link
+                  href="/signup"
+                  className="relative px-6 py-3 bg-white rounded-md inline-flex items-center font-medium text-medium-blue shadow-sm hover:bg-white/90"
+                >
+                  Get Started
+                </Link>
+              </div>
             </div>
           </div>
         </div>

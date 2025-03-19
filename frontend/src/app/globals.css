@@ -32,23 +32,3 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
-.glow-effect {
-  position: relative;
-}
-
-.glow-effect::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(to right, var(--primary-teal), var(--medium-blue));
-  border-radius: 0.5rem;
-  z-index: -1;
-  opacity: 0.5;
-  filter: blur(5px);
-  transition: opacity 0.3s ease;
-}
-
-.glow-effect:hover::before {
-  opacity: 0.8;
-}
