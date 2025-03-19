@@ -32,3 +32,14 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+@keyframes gradient-wave {
+  0% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.hover\:animate-gradient-wave:hover {
+  background-size: 200% auto;
+  animation: gradient-wave 3s ease-in-out infinite;
+}

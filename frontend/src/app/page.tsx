@@ -14,30 +14,26 @@ export default function Home() {
             <div>
               <h1 className="text-4xl font-extrabold tracking-tight text-dark-blue sm:text-5xl md:text-6xl">
                 <span className="block">Neurotone</span>
-                <span className="block">Detect early signs of cognitive decline</span>
+                <span className="block mt-4 text-lg font-semibold sm:text-xl md:mt-6 md:text-2xl">
+                  Detect early signs of cognitive decline
+                </span>
               </h1>
-              <p className="mt-3 text-base text-medium-blue/90 sm:mt-5 sm:text-lg md:mt-5 md:text-xl">
+              <p className="mt-3 text-sm text-medium-blue/90 sm:mt-5 sm:text-base md:mt-5 md:text-lg">
                 Using voice analysis to detect early-stage dementia and Parkinson&apos;s before symptoms become visibly concerning.
               </p>
-              <div className="mt-8 sm:mt-10">
-                <div className="group relative inline-block">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-sm opacity-25 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
-                  <Link
-                    href="/signup"
-                    className="relative px-6 py-3 bg-white rounded-xl inline-flex items-center font-medium text-gray-800"
-                  >
-                    Get Started
-                  </Link>
-                </div>
-                <div className="group relative inline-block ml-4">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-sm opacity-25 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
-                  <Link
-                    href="#how-it-works"
-                    className="relative px-6 py-3 bg-white rounded-xl inline-flex items-center font-medium text-gray-800"
-                  >
-                    Learn more
-                  </Link>
-                </div>
+              <div className="mt-8 sm:mt-10 flex gap-4">
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white rounded-2xl font-medium transition-[background-color,color,border-color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
+                >
+                  Get Started
+                </Link>
+                <Link
+                  href="#how-it-works"
+                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white rounded-2xl font-medium transition-[background-color,color,border-color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
+                >
+                  Learn more
+                </Link>
               </div>
             </div>
             <div className="flex justify-center">
@@ -53,10 +49,10 @@ export default function Home() {
       <section id="features" className="bg-primary-teal/5 backdrop-blur-sm py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-dark-blue sm:text-4xl">
+            <h2 className="text-2xl font-extrabold text-dark-blue sm:text-3xl">
               Key Features
             </h2>
-            <p className="mt-4 max-w-2xl text-xl text-medium-blue/90 mx-auto">
+            <p className="mt-4 max-w-2xl text-lg text-medium-blue/90 mx-auto">
               Proactive monitoring for peace of mind
             </p>
           </div>
@@ -108,10 +104,10 @@ export default function Home() {
       <section id="how-it-works" className="bg-transparent py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-dark-blue sm:text-4xl">
+            <h2 className="text-2xl font-extrabold text-dark-blue sm:text-3xl">
               How It Works
             </h2>
-            <p className="mt-4 max-w-2xl text-xl text-medium-blue/90 mx-auto">
+            <p className="mt-4 max-w-2xl text-lg text-medium-blue/90 mx-auto">
               Simple process, powerful insights
             </p>
           </div>
@@ -168,25 +164,22 @@ export default function Home() {
       <section className="bg-primary-teal/10 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-dark-blue sm:text-4xl">
+            <h2 className="text-2xl font-extrabold text-dark-blue sm:text-3xl">
               Start monitoring cognitive health today
             </h2>
-            <p className="mt-4 max-w-2xl text-xl text-medium-blue/90 mx-auto">
+            <p className="mt-4 max-w-2xl text-lg text-medium-blue/90 mx-auto">
               Early detection leads to better outcomes. Sign up for Neurotone now.
             </p>
             <div className="mt-8">
-              <div className="group relative inline-block">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur-sm opacity-25 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
-                <Link
-                  href="/signup"
-                  className="relative px-6 py-3 bg-white rounded-xl inline-flex items-center font-medium text-gray-800"
-                >
-                  Get Started
-                </Link>
-              </div>
+              <Link
+                href="/signup"
+                className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white rounded-2xl font-medium transition-[background-color,color,border-color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
+              >
+                Get Started
+              </Link>
             </div>
           </div>
-        </div>
+    </div>
       </section>
       
       <Footer />
