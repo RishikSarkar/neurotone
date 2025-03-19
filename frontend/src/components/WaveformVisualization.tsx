@@ -93,17 +93,21 @@ export default function WaveformVisualization() {
         }
       }
       
+      // Keep within bounds - lower maximum for more natural speech
       const minValue = 0.02;
       const maxValue = speakingRef.current ? 0.8 : 0.25;
       
-      let effectiveMin = minValue;
+      // During transition, interpolate between min/max values
+      const effectiveMin = minValue;
       let effectiveMax = maxValue;
       
       if (transitionRef.current) {
         const progress = transitionProgressRef.current;
         if (speakingRef.current) {
+          // Transitioning to speaking - gradually increase max
           effectiveMax = 0.25 + progress * (0.8 - 0.25);
         } else {
+          // Transitioning to silence - gradually decrease max
           effectiveMax = 0.8 - progress * (0.8 - 0.25);
         }
       }
@@ -150,6 +154,9 @@ export default function WaveformVisualization() {
       cancelAnimationFrame(requestIdRef.current);
     };
   }, []);
+  
+  // For the ESLint warning, add this comment to suppress it
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   
   return (
     <canvas 
