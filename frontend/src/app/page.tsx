@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WaveformContainer from '@/components/WaveformContainer';
 
 export default function Home() {
   return (
@@ -37,9 +38,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-full max-w-md h-96 bg-blue-teal/10 rounded-lg flex items-center justify-center">
-                <div className="text-medium-blue text-xl">Voice Waveform Visualization</div>
-              </div>
+              <WaveformContainer />
             </div>
           </div>
         </div>
