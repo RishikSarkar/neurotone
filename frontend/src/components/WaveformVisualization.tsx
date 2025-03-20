@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 export default function WaveformVisualization() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,7 +20,7 @@ export default function WaveformVisualization() {
     barsRef.current = initialBars;
   }, []);
 
-  const animate = (timestamp: number) => {
+  const animate = useCallback((timestamp: number) => {
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
@@ -145,16 +145,15 @@ export default function WaveformVisualization() {
     });
     
     requestIdRef.current = requestAnimationFrame(animate);
-  };
+  }, []);
   
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     requestIdRef.current = requestAnimationFrame(animate);
     
     return () => {
       cancelAnimationFrame(requestIdRef.current);
     };
-  }, []);
+  }, [animate]);
   
   return (
     <canvas 
