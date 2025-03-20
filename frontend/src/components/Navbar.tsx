@@ -13,24 +13,19 @@ export default function Navbar() {
   const isScrollingUp = useRef(false);
   const animationActive = useRef(false);
 
-  // Add scroll event listener
   useEffect(() => {
     const handleScroll = () => {
-      // Determine scroll direction
       isScrollingUp.current = window.scrollY < prevScrollY.current;
       prevScrollY.current = window.scrollY;
       
-      // Set scrolled state
       if (window.scrollY > 10) {
         if (!isScrolled && !animationActive.current) {
-          // Start removing characters
           animationActive.current = true;
           typeEffect(fullText.length, 0);
         }
         setIsScrolled(true);
       } else {
         if (isScrolled && !animationActive.current) {
-          // Start adding characters
           animationActive.current = true;
           typeEffect(0, fullText.length);
         }
@@ -39,7 +34,6 @@ export default function Navbar() {
     };
 
     const typeEffect = (start: number, end: number) => {
-      // Determine if we're typing or backspacing
       const isTyping = start < end;
       let currentIndex = start;
       
@@ -57,7 +51,7 @@ export default function Navbar() {
           currentIndex--;
           setDisplayText(fullText.substring(0, currentIndex));
         }
-      }, 50); // Speed of the typing effect
+      }, 50);
     };
 
     window.addEventListener('scroll', handleScroll);
