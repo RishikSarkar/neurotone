@@ -1,27 +1,90 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [displayText, setDisplayText] = useState("Neurotone");
+  const fullText = "Neurotone";
+  const prevScrollY = useRef(0);
+  const isScrollingUp = useRef(false);
+  const animationActive = useRef(false);
+
+  // Add scroll event listener
+  useEffect(() => {
+    const handleScroll = () => {
+      // Determine scroll direction
+      isScrollingUp.current = window.scrollY < prevScrollY.current;
+      prevScrollY.current = window.scrollY;
+      
+      // Set scrolled state
+      if (window.scrollY > 10) {
+        if (!isScrolled && !animationActive.current) {
+          // Start removing characters
+          animationActive.current = true;
+          typeEffect(fullText.length, 0);
+        }
+        setIsScrolled(true);
+      } else {
+        if (isScrolled && !animationActive.current) {
+          // Start adding characters
+          animationActive.current = true;
+          typeEffect(0, fullText.length);
+        }
+        setIsScrolled(false);
+      }
+    };
+
+    const typeEffect = (start: number, end: number) => {
+      // Determine if we're typing or backspacing
+      const isTyping = start < end;
+      let currentIndex = start;
+      
+      const animationInterval = setInterval(() => {
+        if ((isTyping && currentIndex >= end) || (!isTyping && currentIndex <= end)) {
+          clearInterval(animationInterval);
+          animationActive.current = false;
+          return;
+        }
+        
+        if (isTyping) {
+          currentIndex++;
+          setDisplayText(fullText.substring(0, currentIndex));
+        } else {
+          currentIndex--;
+          setDisplayText(fullText.substring(0, currentIndex));
+        }
+      }, 50); // Speed of the typing effect
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isScrolled]);
 
   return (
-    <nav className="bg-[#f5f7f8]/90 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-[#f5f7f8]/90 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex">
-            <div className="flex-shrink-0 flex items-center space-x-3">
-              <Image 
-                src="/logo-black.png" 
-                alt="Neurotone Logo" 
-                width={40} 
-                height={40} 
-                className="w-auto h-10"
-              />
-              <Link href="/" className="text-xl font-bold text-dark-blue">
-                Neurotone
+            <div className="flex-shrink-0 flex items-center">
+              <Link href="/" className="flex items-center space-x-3">
+                <Image 
+                  src="/logo-black.png" 
+                  alt="Neurotone Logo" 
+                  width={40} 
+                  height={40} 
+                  className="w-auto h-10"
+                />
+                <span 
+                  className="text-xl font-bold text-dark-blue min-w-[40px] h-[28px]"
+                >
+                  {displayText}
+                </span>
               </Link>
             </div>
           </div>
