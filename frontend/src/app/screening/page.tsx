@@ -206,7 +206,8 @@ export default function ScreeningPage() {
       setShowNextButton(false);
       // Animation will be triggered by the key change on the motion.div
     }
-  }, [currentIntroIndex, surveyStage]); // Depends only on index and stage change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIntroIndex, surveyStage]); // Warning disabled for this line
   
   // Handle intro progression
   const handleIntroNext = () => {
