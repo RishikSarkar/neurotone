@@ -427,7 +427,6 @@ export default function ScreeningPage() {
                               variants={letterVariant}
                               className="inline-block"
                             >
-                              {/* eslint-disable-next-line react/no-unescaped-entities */}
                               {char === " " ? "\u00A0" : char}
                             </motion.span>
                           ))}
@@ -611,7 +610,7 @@ export default function ScreeningPage() {
                     Final Thoughts
                   </h1>
                   <p className="text-xl sm:text-2xl font-medium text-medium-blue/95 mb-10 animate-pulse-slow max-w-3xl">
-                    Is there anything else you'd like to share before we get started?
+                    Is there anything else you&apos;d like to share before we get started?
                   </p>
                   
                   <div className="w-full max-w-md flex flex-col items-center mb-10">
