@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
@@ -140,10 +140,6 @@ function calculateGlobalCdr(scores: Scores): number {
 
   // Determine majority side
   if (numLowerThanM > Math.floor(secondaryCount / 2)) { // Majority are less severe than M
-    // Check if the adjacent lower score is valid (e.g., if M=1, check if 0.5 exists, if M=2, check if 1 exists)
-    const adjacentLower = M === 1 ? 0.5 : M - 1;
-    // Count secondary scores equal to the adjacent lower score
-    const numEqualToAdjacentLower = secondaryScores.filter(score => score === adjacentLower).length;
     // If M is 1, and a majority of secondaries are 0.5 or 0, Global CDR is 0.5
      if (M === 1 && (numEqualToM + numLowerThanM) > Math.floor(secondaryCount / 2)) {
          return 0.5;
@@ -155,9 +151,6 @@ function calculateGlobalCdr(scores: Scores): number {
   }
 
   if (numHigherThanM > Math.floor(secondaryCount / 2)) { // Majority are more severe than M
-      // Count secondary scores equal to the adjacent higher score
-      const adjacentHigher = M + 1;
-      const numEqualToAdjacentHigher = secondaryScores.filter(score => score === adjacentHigher).length;
       // If a majority of secondaries are higher than M, Global CDR is M+1
       if (numHigherThanM > Math.floor(secondaryCount / 2)) {
           return M + 1;
