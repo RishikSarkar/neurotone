@@ -481,18 +481,11 @@ export default function ScreeningPage() {
                       />
                     </div>
                     
-                    <div className="flex w-full justify-between gap-4">
-                      <button
-                        onClick={handlePrevious}
-                        className="flex-1 px-6 py-3 rounded-lg bg-white border-2 border-dark-blue/50 text-dark-blue hover:bg-blue-teal/10 transition-all duration-200 cursor-pointer"
-                      >
-                        Back
-                      </button>
-                      
+                    <div className="w-full">
                       <button
                         onClick={handleUsernameSubmit}
                         disabled={!isUsernameValid}
-                        className="flex-1 px-6 py-3 rounded-lg bg-white border-2 border-dark-blue text-dark-blue hover:bg-blue-teal/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+                        className="w-full px-6 py-3 rounded-lg bg-white border-2 border-dark-blue text-dark-blue hover:bg-blue-teal/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
                       >
                         Continue
                       </button>
