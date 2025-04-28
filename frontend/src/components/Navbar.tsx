@@ -85,7 +85,7 @@ export default function Navbar() {
           
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              href="/about"
+              href="/"
               className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               About
@@ -97,13 +97,13 @@ export default function Navbar() {
               Dashboard
             </Link>
             <Link
-              href="/dashboard"
+              href="/"
               className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               Contact
             </Link>
             <Link
-              href="/dashboard"
+              href="/screening"
               className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               Log in

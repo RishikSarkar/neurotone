@@ -164,6 +164,26 @@ function calculateGlobalCdr(scores: Scores): number {
   // This covers cases where scores are distributed around M without a clear trend.
 }
 
+function getCdrSbInterpretation(score: number): string {
+  if (score === 0) return "Normal";
+  if (score >= 0.5 && score <= 2.0) return "Very Mild Impairment / Subjective Decline";
+  if (score >= 2.5 && score <= 4.0) return "Mild Cognitive Impairment (MCI)";
+  if (score >= 4.5 && score <= 9.0) return "Mild Dementia";
+  if (score >= 9.5 && score <= 15.0) return "Moderate Dementia";
+  if (score >= 15.5 && score <= 18.0) return "Severe Dementia";
+  return "Score out of range"; // Fallback
+}
+
+function getGlobalCdrInterpretation(score: number): string {
+  switch (score) {
+    case 0: return "Normal Aging";
+    case 0.5: return "Questionable Impairment / Mild Cognitive Impairment (MCI)";
+    case 1: return "Mild Dementia";
+    case 2: return "Moderate Dementia";
+    case 3: return "Severe Dementia";
+    default: return "Score out of range"; // Fallback
+  }
+}
 
 // --- Component ---
 export default function ScreeningPage() {
@@ -202,7 +222,7 @@ export default function ScreeningPage() {
   // Effect to reset button visibility for intro stage
   useEffect(() => {
     if (surveyStage === SurveyStage.Intro) {
-      // Reset button visibility when the message index changes
+      // Reset animation state when the message index changes
       setShowNextButton(false);
       // Animation will be triggered by the key change on the motion.div
     }
@@ -211,6 +231,7 @@ export default function ScreeningPage() {
   
   // Handle intro progression
   const handleIntroNext = () => {
+    // Allow clicking during animation by resetting animation state
     if (currentIntroIndex < introMessages.length - 1) {
       setCurrentIntroIndex(currentIntroIndex + 1);
     } else {
@@ -372,8 +393,8 @@ export default function ScreeningPage() {
     visible: {
       opacity: 1,
       transition: {
-        delay: 0.3, // Delay before starting the sentence fade-in
-        staggerChildren: 0.025, // Time between each letter fading in (adjust for speed)
+        delay: 0.2, // Reduced delay before starting animation
+        staggerChildren: 0.015, // Faster letter appearance (reduced from 0.025)
       },
     },
   };
@@ -438,16 +459,14 @@ export default function ScreeningPage() {
                   
                   {/* Fixed position button container at bottom */}
                   <div className="h-32 flex items-center justify-center w-full">
-                    {showNextButton && (
-                      <motion.button
-                        onClick={handleIntroNext}
-                        variants={pulseVariants}
-                        animate="pulse"
-                        className="px-12 py-4 bg-white rounded-full border-2 border-dark-blue text-dark-blue text-base font-medium hover:bg-blue-teal/10 transition-all duration-200 cursor-pointer"
-                      >
-                        {currentIntroIndex < introMessages.length - 1 ? 'Continue' : 'Get Started'}
-                      </motion.button>
-                    )}
+                    <motion.button
+                      onClick={handleIntroNext}
+                      variants={pulseVariants}
+                      animate="pulse"
+                      className="px-12 py-4 bg-white rounded-full border-2 border-dark-blue text-dark-blue text-base font-medium hover:bg-blue-teal/10 transition-all duration-200 cursor-pointer"
+                    >
+                      {currentIntroIndex < introMessages.length - 1 ? 'Continue' : 'Get Started'}
+                    </motion.button>
                   </div>
                 </motion.div>
               )}
@@ -572,7 +591,7 @@ export default function ScreeningPage() {
                             whileHover={{ scale: 1.05, y: -2 }}
                             transition={{ duration: 0.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className={`w-full min-h-[70px] px-3 py-3 rounded-lg transition-all duration-100 text-center text-sm flex items-center justify-center cursor-pointer border-2 ${
+                            className={`w-full min-h-[70px] px-3 py-3 rounded-lg transition-all duration-100 text-center text-md flex items-center justify-center cursor-pointer border-2 ${
                               isSelected
                                 ? 'bg-white text-dark-blue scale-105'
                                 : 'bg-white border-transparent hover:bg-blue-teal/20 text-medium-blue hover:text-dark-blue'
@@ -640,28 +659,45 @@ export default function ScreeningPage() {
               variants={resultVariants}
               initial="hidden"
               animate="visible"
-              className="w-full max-w-xl text-center bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col items-center justify-center"
+              className="w-full max-w-2xl text-center bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-xl border-2 border-dark-blue flex flex-col items-center justify-center"
             >
-              <h1 className="text-3xl font-bold text-dark-blue mb-4">Screening Complete</h1>
-              <p className="text-lg text-medium-blue/90 mb-6">
-                Thank you for completing the initial screening. Your results are shown below.
+              <h1 className="text-2xl md:text-3xl font-bold text-dark-blue mb-4">Screening Complete</h1>
+              <p className="text-base md:text-lg text-medium-blue/90 mb-6">
+                Thank you. Below are the preliminary results from the Clinical Dementia Rating (CDR) scale screening.
               </p>
               {results && (
-                 <div className="space-y-3 text-left bg-primary-teal/5 p-6 rounded-lg border border-primary-teal/20 w-full">
-                    <p className="text-lg font-semibold text-dark-blue">
-                        CDR Sum-of-Boxes (CDR-SB): <span className="font-bold text-blue-teal">{results.cdrSb}</span>
-                    </p>
-                    <p className="text-lg font-semibold text-dark-blue">
-                        Global CDR Score: <span className="font-bold text-blue-teal">{results.globalCdr}</span>
-                    </p>
+                 <div className="space-y-5 text-left bg-primary-teal/5 p-6 rounded-lg w-full mb-6">
+                    {/* CDR-SB Score and Interpretation */}
+                    <div>
+                        <p className="text-base md:text-lg font-semibold text-dark-blue">
+                            CDR Sum-of-Boxes (CDR-SB): <span className="font-bold text-blue-teal text-lg md:text-xl">{results.cdrSb}</span>
+                        </p>
+                        <p className="text-sm md:text-base text-medium-blue/80 font-medium mt-1">
+                           Interpretation: {getCdrSbInterpretation(results.cdrSb)}
+                        </p>
+                    </div>
+                     {/* Global CDR Score and Interpretation */}
+                     <div>
+                        <p className="text-base md:text-lg font-semibold text-dark-blue">
+                            Global CDR Score: <span className="font-bold text-blue-teal text-lg md:text-xl">{results.globalCdr}</span>
+                        </p>
+                         <p className="text-sm md:text-base text-medium-blue/80 font-medium mt-1">
+                           Interpretation: {getGlobalCdrInterpretation(results.globalCdr)}
+                        </p>
+                    </div>
                  </div>
               )}
-              <p className="mt-6 text-medium-blue/80 text-sm">
-                This is a preliminary screening. Please consult a healthcare professional for a formal diagnosis.
+              <p className="mt-2 text-medium-blue/80 text-xs md:text-sm px-4">
+                This is a preliminary screening only. Please consult a healthcare professional for a formal evaluation and diagnosis.
               </p>
-               <p className="mt-4 text-medium-blue/80 text-sm">
-                Next step: Account creation (to be implemented).
-              </p>
+
+              {/* Continue Button */}
+              <button
+                 onClick={() => { /* Add navigation logic later, e.g., router.push('/login') or similar */ }}
+                 className="mt-8 px-8 py-3 rounded-xl bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white font-medium transition-[background-color,color,border] duration-150 ease-linear hover:animate-gradient-wave bg-[length:200%_auto] cursor-pointer"
+              >
+                 Continue
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
