@@ -427,7 +427,8 @@ export default function ScreeningPage() {
                               variants={letterVariant}
                               className="inline-block"
                             >
-                              {char}
+                              {/* eslint-disable-next-line react/no-unescaped-entities */}
+                              {char === " " ? "\u00A0" : char}
                             </motion.span>
                           ))}
                         </span>
