@@ -10,7 +10,7 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="min-h-[calc(100vh-64px)] bg-transparent flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full mt-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl font-extrabold tracking-tight text-dark-blue sm:text-5xl md:text-6xl">
@@ -24,14 +24,14 @@ export default function Home() {
               </p>
               <div className="mt-8 sm:mt-10 flex gap-4">
                 <Link
-                  href="/dashboard"
-                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
+                  href="/screening"
+                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-lg font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
                 >
                   Get Started
                 </Link>
                 <Link
                   href="/dashboard"
-                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
+                  className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-lg font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
                 >
                   Learn more
                 </Link>
@@ -171,8 +171,8 @@ export default function Home() {
             </p>
             <div className="mt-8">
               <Link
-                href="/dashboard"
-                className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
+                href="/screening"
+                className="inline-flex items-center px-6 py-3 bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-lg font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
               >
                 Get Started
               </Link>

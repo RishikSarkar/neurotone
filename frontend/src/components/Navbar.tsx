@@ -86,31 +86,31 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="/about"
-              className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
+              className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               About
             </Link>
             <Link
               href="/dashboard"
-              className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
+              className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               Dashboard
             </Link>
             <Link
               href="/dashboard"
-              className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
+              className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               Contact
             </Link>
             <Link
               href="/dashboard"
-              className="text-medium-blue hover:text-dark-blue px-3 py-2 text-base font-medium"
+              className="text-medium-blue hover:text-dark-blue hover:bg-white px-5 py-2.5 text-base font-medium rounded-lg"
             >
               Log in
             </Link>
             <Link
-              href="/dashboard"
-              className="inline-flex items-center px-5 py-2.5 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto] text-sm sm:text-base"
+              href="/screening"
+              className="inline-flex items-center px-5 py-2.5 bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-lg font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto] text-sm sm:text-base"
             >
               Sign Up
             </Link>
@@ -167,7 +167,7 @@ export default function Navbar() {
             </Link>
             <div className="p-3">
               <Link
-                href="/dashboard"
+                href="/screening"
                 className="block w-full text-center px-6 py-3 bg-white text-gray-800 border border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white rounded-2xl text-base font-medium transition-[background-color,color] duration-100 ease-linear hover:animate-gradient-wave bg-[length:200%_auto]"
               >
                 Sign up
