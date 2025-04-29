@@ -57,14 +57,26 @@ const formatDateTick = (tickItem: string) => {
   }
 };
 
-// --- Custom Tooltip (Background might need slight adjustment if needed, but likely fine) ---
-const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
+// Using 'any' specifically for the Recharts payload structure
+interface CustomTooltipProps {
+  active?: boolean;
+  // Using 'any' here as Recharts internal payload structure can be complex/variable
+  payload?: any[];
+  label?: string | number;
+}
+
+// Apply the interface
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
+    // Type checking inside the function remains useful
+    if (active && payload && payload.length && payload[0].payload && (typeof label === 'string' || typeof label === 'number')) { // Allow number label too
+      const data: ChartDataPoint = payload[0].payload; // Still assert the type you expect here
+
+      const date = new Date(label); // Simplified date creation
+
       // Using dark text on light tooltip background
       return (
         <div className="bg-gray-50/95 p-3 border border-gray-300 rounded-lg shadow-lg text-sm font-[Inter,sans-serif]">
-          <p className="font-semibold text-gray-800 mb-1">{`Date: ${new Date(label).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`}</p>
+          <p className="font-semibold text-gray-800 mb-1">{`Date: ${date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`}</p>
           <p className="text-gray-700">{`Est. CDR-SB: `}<span className="font-medium">{data.eCdrSb.toFixed(2)}</span></p>
           <p className="text-gray-600">{`Model Probability: `}<span className="font-medium">{(data.rawP * 100).toFixed(1)}%</span></p>
         </div>

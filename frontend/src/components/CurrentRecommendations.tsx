@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Recommendation, recommendationsData, getCdrBandKeyFromScore } from '@/lib/recommendations';
+import { recommendationsData, getCdrBandKeyFromScore } from '@/lib/recommendations';
 
 interface ChartDataPoint {
   date: string;

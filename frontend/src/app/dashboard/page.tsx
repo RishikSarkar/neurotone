@@ -297,14 +297,13 @@ export default function Dashboard() {
     }
   };
 
-  const sendAudioToBackend = (blob: Blob) => {
+  const sendAudioToBackend = useCallback((blob: Blob) => {
     if (!blob) {
+      console.warn("sendAudioToBackend called with no blob.");
       return;
     }
-
     setIsProcessing(true);
     setPredictionResult(null);
-
     console.log("Simulating backend processing with progressive increase...");
 
     // Simulate delay (random between 4 and 10 seconds)
@@ -338,23 +337,13 @@ export default function Dashboard() {
     console.log(`Clamped simulated probability: ${clampedProbability.toFixed(3)}`);
     // --- End of probability calculation ---
 
-
     setTimeout(() => {
-      try {
-        // Use the calculated and clamped probability
-        console.log(`Simulation complete. Setting Probability: ${clampedProbability.toFixed(3)}`);
-        setPredictionResult(clampedProbability);
-
-      } catch (err) {
-        // Handle potential errors during simulation (less likely here)
-        console.error("Error during simulation:", err);
-        setPredictionResult(null);
-      } finally {
-        setIsProcessing(false); // Stop processing indicator
-        setAudioBlob(null); // Clear the processed blob
-      }
+      console.log(`Simulation complete. Setting Probability: ${clampedProbability.toFixed(3)}`);
+      setPredictionResult(clampedProbability);
+      setIsProcessing(false);
+      setAudioBlob(null);
     }, delay);
-  };
+  }, [chartData]);
 
   useEffect(() => {
     if (audioBlob && !isProcessing) {
@@ -414,7 +403,6 @@ export default function Dashboard() {
       
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [predictionResult, isChartLoading, baselineGlobalCdr, currentPosterior, chartData]);
 
   const smoothedChartData = applyEmaSmoothing(chartData);
