@@ -60,8 +60,15 @@ const formatDateTick = (tickItem: string) => {
 // Using 'any' specifically for the Recharts payload structure
 interface CustomTooltipProps {
   active?: boolean;
-  // Using 'any' here as Recharts internal payload structure can be complex/variable
-  payload?: any[];
+   // Define the expected structure more precisely based on usage
+  payload?: Array<{ // Expect an array...
+    payload: ChartDataPoint; // ...where each item has a 'payload' property of type ChartDataPoint
+    // Include other potential properties from Recharts payload item if known, e.g.:
+    // name?: string;
+    // value?: number | string;
+    // color?: string;
+    // dataKey?: string;
+  }>;
   label?: string | number;
 }
 
