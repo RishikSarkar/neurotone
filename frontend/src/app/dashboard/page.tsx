@@ -57,7 +57,7 @@ export default function Dashboard() {
       audioStreamRef.current = stream;
       setPermissionStatus('granted');
       return stream;
-    } catch (_err) {
+    } catch {
       setError("Microphone permission is required to record audio. Please grant access in your browser settings.");
       setPermissionStatus('denied');
       cleanupAudio();
@@ -79,9 +79,9 @@ export default function Dashboard() {
     if (window.AudioContext && window.AudioContext.prototype && typeof window.AudioContext.prototype.resume === 'function') {
       const tempContext = new (window.AudioContext || window.webkitAudioContext)();
       if (tempContext.state === 'suspended') {
-        await tempContext.resume().catch(_e => console.warn("Could not resume audio context:", _e));
+        await tempContext.resume().catch(() => console.warn("Could not resume audio context:"));
       }
-      await tempContext.close().catch(_e => console.warn("Could not close temp audio context:", _e));
+      await tempContext.close().catch(() => console.warn("Could not close temp audio context:"));
     }
 
     const randomIndex = Math.floor(Math.random() * sampleQuestions.length);
@@ -111,7 +111,7 @@ export default function Dashboard() {
         setAudioBlob(blob);
       };
 
-      recorder.onerror = (_event) => {
+      recorder.onerror = () => {
         setError("An error occurred during recording.");
         cleanupAudio();
         setIsRecording(false);
@@ -121,7 +121,7 @@ export default function Dashboard() {
       recorder.start();
       setIsRecording(true);
       setShowRecordingModal(true);
-    } catch (_err) {
+    } catch {
       setError("Could not start recording. Please ensure your microphone is connected and permissions are granted.");
       cleanupAudio();
     }

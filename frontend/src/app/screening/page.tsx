@@ -189,55 +189,44 @@ function getGlobalCdrInterpretation(score: number): string {
 // --- Component ---
 export default function ScreeningPage() {
   const router = useRouter();
-  // Survey stage tracking
   enum SurveyStage {
-    Intro,       // Introduction with typing animations
-    Username,    // Username collection
-    Age,         // Age collection
-    Questions,   // CDR questions
-    FinalComment // Final open-ended comment
+    Intro,
+    Username,
+    Age,
+    Questions,
+    FinalComment
   }
   
-  // Original states 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [scores, setScores] = useState<Scores>({});
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [results, setResults] = useState<{ cdrSb: number; globalCdr: number } | null>(null);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   
-  // New states for additional questions
   const [surveyStage, setSurveyStage] = useState<SurveyStage>(SurveyStage.Intro);
   const [username, setUsername] = useState<string>('');
   const [age, setAge] = useState<string>('');
   const [finalComment, setFinalComment] = useState<string>('');
   
-  // Intro sequence states
   const introMessages = [
     "Welcome to Neurotone. We will have you complete a short survey before you begin.",
     "The contents of this survey are highly secured and not available to anyone. It is only used to create a starting point to understand how to personalize your plan.",
     "Some of the survey questions would be easier to answer with a caretaker or family member if available.",
-    "Let's get started!"
+    "Let\'s get started!"
   ];
   const [currentIntroIndex, setCurrentIntroIndex] = useState(0);
-  const [showNextButton, setShowNextButton] = useState(false);
-  
-  // Effect to reset button visibility for intro stage
+
   useEffect(() => {
     if (surveyStage === SurveyStage.Intro) {
       // Reset animation state when the message index changes
-      setShowNextButton(false);
-      // Animation will be triggered by the key change on the motion.div
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIntroIndex, surveyStage]); // Warning disabled for this line
+  }, [currentIntroIndex, surveyStage]);
   
-  // Handle intro progression
   const handleIntroNext = () => {
-    // Allow clicking during animation by resetting animation state
     if (currentIntroIndex < introMessages.length - 1) {
       setCurrentIntroIndex(currentIntroIndex + 1);
     } else {
-      // Move to username screen when all messages are shown
       setDirection('forward');
       setSurveyStage(SurveyStage.Username);
     }
@@ -441,7 +430,6 @@ export default function ScreeningPage() {
                       variants={sentenceVariant}
                       initial="hidden"
                       animate="visible"
-                      onAnimationComplete={() => setShowNextButton(true)}
                     >
                       {introMessages[currentIntroIndex].split(" ").map((word, wordIndex) => (
                         <span key={`word-${wordIndex}`} className="inline-block mr-1 mb-1">
