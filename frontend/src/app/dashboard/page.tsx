@@ -57,7 +57,7 @@ export default function Dashboard() {
       audioStreamRef.current = stream;
       setPermissionStatus('granted');
       return stream;
-    } catch (err) {
+    } catch (_err) {
       setError("Microphone permission is required to record audio. Please grant access in your browser settings.");
       setPermissionStatus('denied');
       cleanupAudio();
@@ -79,9 +79,9 @@ export default function Dashboard() {
     if (window.AudioContext && window.AudioContext.prototype && typeof window.AudioContext.prototype.resume === 'function') {
       const tempContext = new (window.AudioContext || window.webkitAudioContext)();
       if (tempContext.state === 'suspended') {
-        await tempContext.resume().catch(e => console.warn("Could not resume audio context:", e));
+        await tempContext.resume().catch(_e => console.warn("Could not resume audio context:", _e));
       }
-      await tempContext.close().catch(e => console.warn("Could not close temp audio context:", e));
+      await tempContext.close().catch(_e => console.warn("Could not close temp audio context:", _e));
     }
 
     const randomIndex = Math.floor(Math.random() * sampleQuestions.length);
@@ -111,7 +111,7 @@ export default function Dashboard() {
         setAudioBlob(blob);
       };
 
-      recorder.onerror = (event) => {
+      recorder.onerror = (_event) => {
         setError("An error occurred during recording.");
         cleanupAudio();
         setIsRecording(false);
@@ -121,7 +121,7 @@ export default function Dashboard() {
       recorder.start();
       setIsRecording(true);
       setShowRecordingModal(true);
-    } catch (err) {
+    } catch (_err) {
       setError("Could not start recording. Please ensure your microphone is connected and permissions are granted.");
       cleanupAudio();
     }
@@ -192,6 +192,7 @@ export default function Dashboard() {
     if (audioBlob && !isRecording && !isProcessing) {
       sendAudioToBackend(audioBlob);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioBlob, isRecording, isProcessing]);
 
   return (
@@ -286,7 +287,7 @@ export default function Dashboard() {
                       <p className="text-sm text-medium-blue/70">(Higher score may indicate similarity to patterns associated with certain conditions)</p>
                     </div>
                   ) : error && !error.toLowerCase().includes("permission") ? (
-                    <p className="text-red-600 text-center">Analysis failed. {error}</p>
+                    <p className="text-medium-blue/90 text-center">Analysis failed. {error}</p>
                   ) : (
                     <div className="flex flex-col items-center justify-center text-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-teal/30 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
