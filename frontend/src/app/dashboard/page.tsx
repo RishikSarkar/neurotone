@@ -217,9 +217,9 @@ export default function Dashboard() {
           {error && (
             <div className="mb-6 p-4 bg-red-100 border border-red-300 text-red-800 rounded-lg">
               <p className="font-medium">Error:</p>
-              <p>{error}</p>
+              <p>{`{error}`}</p>
               {permissionStatus === 'denied' && (
-                <p className="text-sm mt-1">You may need to adjust permissions in your browser's site settings and refresh the page.</p>
+                <p className="text-sm mt-1">You may need to adjust permissions in your browser&apos;s site settings and refresh the page.</p>
               )}
             </div>
           )}
@@ -288,7 +288,7 @@ export default function Dashboard() {
                       <p className="text-sm text-medium-blue/70">(Higher score may indicate similarity to patterns associated with certain conditions)</p>
                     </div>
                   ) : error && !error.toLowerCase().includes("permission") ? (
-                    <p className="text-medium-blue/90 text-center">Analysis failed. {error}</p>
+                    <p className="text-medium-blue/90 text-center">{`Analysis failed. ${error}`}</p>
                   ) : (
                     <div className="flex flex-col items-center justify-center text-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-teal/30 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
