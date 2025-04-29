@@ -325,12 +325,27 @@ export default function ScreeningPage() {
     const globalCdr = calculateGlobalCdr(scores);
     setResults({ cdrSb, globalCdr });
     setIsCompleted(true);
+
     console.log("Screening Complete. Raw Scores:", scores);
     console.log("Calculated CDR-SB:", cdrSb);
     console.log("Calculated Global CDR:", globalCdr);
     console.log("Username:", username);
     console.log("Age:", age);
     console.log("Final Comment:", finalComment);
+
+    // --- Store baseline results for the dashboard ---
+    try {
+        localStorage.setItem('baselineCdrSb', cdrSb.toString());
+        localStorage.setItem('baselineGlobalCdr', globalCdr.toString());
+        // Clear any previous chart data when a new screening is done
+        localStorage.removeItem('chartData');
+        localStorage.removeItem('currentPosterior');
+        console.log("Baseline CDR scores saved to local storage.");
+    } catch (error) {
+        console.error("Error saving baseline scores to local storage:", error);
+        // Handle potential storage errors (e.g., storage full, security restrictions)
+    }
+    // --- End of storage ---
   };
 
   // Determine button states
@@ -686,7 +701,7 @@ export default function ScreeningPage() {
                  onClick={() => router.push('/dashboard')}
                  className="mt-8 px-8 py-3 rounded-xl bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white font-medium transition-[background-color,color,border] duration-150 ease-linear hover:animate-gradient-wave bg-[length:200%_auto] cursor-pointer"
               >
-                 Continue
+                 Continue to Dashboard
               </button>
             </motion.div>
           )}

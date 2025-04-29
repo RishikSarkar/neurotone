@@ -76,20 +76,20 @@ const RealTimeWaveform: React.FC<RealTimeWaveformProps> = ({ audioStream }) => {
 
       analyser.getByteFrequencyData(dataArray);
 
-      ctx.fillStyle = '#f9f9f9';
+      ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-      const barWidth = (WIDTH / bufferLength) * 1.5;
+      const barWidth = (WIDTH / bufferLength) * 2.5;
       let barHeight;
       let x = 0;
 
-      const gradient = ctx.createLinearGradient(0, centerY - HEIGHT*0.4, 0, centerY + HEIGHT*0.4);
-      gradient.addColorStop(0, '#051934');
-      gradient.addColorStop(1, '#98b7b3');
+      const gradient = ctx.createLinearGradient(0, centerY - HEIGHT * 0.4, 0, centerY + HEIGHT * 0.4);
+      gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+      gradient.addColorStop(1, 'rgba(255, 255, 255, 0.6)');
       ctx.fillStyle = gradient;
 
       for (let i = 0; i < bufferLength; i++) {
-        barHeight = (dataArray[i] / 255.0) * (HEIGHT * 0.8);
+        barHeight = (dataArray[i] / 255.0) * HEIGHT * 0.9;
 
         ctx.fillRect(
             x,
@@ -98,7 +98,7 @@ const RealTimeWaveform: React.FC<RealTimeWaveformProps> = ({ audioStream }) => {
             barHeight
         );
 
-        x += barWidth + 1;
+        x += barWidth + 2;
       }
 
       animationFrameId.current = requestAnimationFrame(draw);
