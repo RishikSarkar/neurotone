@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // --- Updated CDR Data Structure ---
 interface Choice {
@@ -187,6 +188,7 @@ function getGlobalCdrInterpretation(score: number): string {
 
 // --- Component ---
 export default function ScreeningPage() {
+  const router = useRouter();
   // Survey stage tracking
   enum SurveyStage {
     Intro,       // Introduction with typing animations
@@ -693,7 +695,7 @@ export default function ScreeningPage() {
 
               {/* Continue Button */}
               <button
-                 onClick={() => { /* Add navigation logic later, e.g., router.push('/login') or similar */ }}
+                 onClick={() => router.push('/dashboard')}
                  className="mt-8 px-8 py-3 rounded-xl bg-white text-gray-800 border-2 border-black hover:border-transparent hover:bg-gradient-to-r hover:from-[#051934] hover:to-[#98b7b3] hover:text-white font-medium transition-[background-color,color,border] duration-150 ease-linear hover:animate-gradient-wave bg-[length:200%_auto] cursor-pointer"
               >
                  Continue
