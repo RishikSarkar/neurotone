@@ -52,7 +52,7 @@ export const cdrBucketMidpoints: Record<string, number> = {
 const formatDateTick = (tickItem: string) => {
   try {
     return new Date(tickItem).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  } catch (e) {
+  } catch {
     return tickItem; // Fallback if parsing fails
   }
 };
