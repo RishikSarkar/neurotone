@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import RealTimeWaveform from '@/components/RealTimeWaveform';
 import { CdrTrajectoryChart, cdrBucketMidpoints } from '@/components/CdrTrajectoryChart';
 import { CurrentRecommendations } from '@/components/CurrentRecommendations';
-import { getCdrBandKeyFromScore, recommendationsData } from '@/lib/recommendations';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const sampleQuestions = [
@@ -135,7 +134,6 @@ export default function Dashboard() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [predictionResult, setPredictionResult] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [currentPrompt, setCurrentPrompt] = useState<string>('');
   const [showRecordingModal, setShowRecordingModal] = useState(false);
 
@@ -151,53 +149,47 @@ export default function Dashboard() {
 
   useEffect(() => {
     setIsChartLoading(true);
-    try {
-        const storedBaselineSb = localStorage.getItem(LS_BASELINE_SB);
-        const storedBaselineGlobal = localStorage.getItem(LS_BASELINE_GLOBAL);
-        const storedChartData = localStorage.getItem(LS_CHART_DATA);
-        const storedPosterior = localStorage.getItem(LS_POSTERIOR);
+    const storedBaselineSb = localStorage.getItem(LS_BASELINE_SB);
+    const storedBaselineGlobal = localStorage.getItem(LS_BASELINE_GLOBAL);
+    const storedChartData = localStorage.getItem(LS_CHART_DATA);
+    const storedPosterior = localStorage.getItem(LS_POSTERIOR);
 
-        const loadedBaselineSb = storedBaselineSb ? parseFloat(storedBaselineSb) : null;
-        const loadedBaselineGlobal = storedBaselineGlobal ? parseFloat(storedBaselineGlobal) : null;
-        const loadedChartData: ChartDataPoint[] = storedChartData ? JSON.parse(storedChartData) : [];
-        const loadedPosterior = storedPosterior ? JSON.parse(storedPosterior) : null;
+    const loadedBaselineSb = storedBaselineSb ? parseFloat(storedBaselineSb) : null;
+    const loadedBaselineGlobal = storedBaselineGlobal ? parseFloat(storedBaselineGlobal) : null;
 
-        setBaselineCdrSb(loadedBaselineSb);
-        setBaselineGlobalCdr(loadedBaselineGlobal);
-        setChartData(loadedChartData);
-
-        if (loadedChartData.length === 0 && loadedBaselineGlobal !== null) {
-            setCurrentPosterior(getPriorDistribution(loadedBaselineGlobal));
-        } else {
-             setCurrentPosterior(loadedPosterior);
-        }
-
-        console.log("Loaded Baseline SB:", loadedBaselineSb);
-        console.log("Loaded Baseline Global:", loadedBaselineGlobal);
-        console.log("Loaded Chart Data:", loadedChartData);
-        console.log("Loaded Posterior:", loadedPosterior || getPriorDistribution(loadedBaselineGlobal));
-
-    } catch (error) {
-        console.error("Error loading data from local storage:", error);
-        setError("Could not load previous analysis data.");
-        setBaselineCdrSb(null);
-        setBaselineGlobalCdr(null);
-        setChartData([]);
-        setCurrentPosterior(null);
-    } finally {
-        setIsChartLoading(false);
+    let loadedChartData: ChartDataPoint[] = [];
+    if (storedChartData) {
+       try { loadedChartData = JSON.parse(storedChartData); } catch { /* ignore parse error */ }
     }
+
+    let loadedPosterior = null;
+    if (storedPosterior) {
+       try { loadedPosterior = JSON.parse(storedPosterior); } catch { /* ignore parse error */ }
+    }
+
+    setBaselineCdrSb(loadedBaselineSb);
+    setBaselineGlobalCdr(loadedBaselineGlobal);
+    setChartData(loadedChartData);
+
+    if (loadedChartData.length === 0 && loadedBaselineGlobal !== null) {
+        setCurrentPosterior(getPriorDistribution(loadedBaselineGlobal));
+    } else {
+         setCurrentPosterior(loadedPosterior);
+    }
+
+    console.log("Loaded Baseline SB:", loadedBaselineSb);
+    console.log("Loaded Baseline Global:", loadedBaselineGlobal);
+    console.log("Loaded Chart Data:", loadedChartData);
+    console.log("Loaded Posterior:", loadedPosterior || getPriorDistribution(loadedBaselineGlobal));
+
+    setIsChartLoading(false);
   }, []);
 
   useEffect(() => {
       if (!isChartLoading) {
-          try {
-              localStorage.setItem(LS_CHART_DATA, JSON.stringify(chartData));
-              if (currentPosterior) {
-                  localStorage.setItem(LS_POSTERIOR, JSON.stringify(currentPosterior));
-              }
-          } catch (error) {
-              console.error("Error saving data to local storage:", error);
+          localStorage.setItem(LS_CHART_DATA, JSON.stringify(chartData));
+          if (currentPosterior) {
+              localStorage.setItem(LS_POSTERIOR, JSON.stringify(currentPosterior));
           }
       }
   }, [chartData, currentPosterior, isChartLoading]);
@@ -222,14 +214,12 @@ export default function Dashboard() {
 
   const requestPermission = async () => {
     setPermissionStatus('prompted');
-    setError(null);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       audioStreamRef.current = stream;
       setPermissionStatus('granted');
       return stream;
     } catch {
-      setError("Microphone permission is required to record audio. Please grant access in your browser settings.");
       setPermissionStatus('denied');
       cleanupAudio();
       return null;
@@ -237,8 +227,6 @@ export default function Dashboard() {
   };
 
   const startRecording = async () => {
-    setError(null);
-
     let stream = audioStreamRef.current;
 
     if (!stream || permissionStatus !== 'granted') {
@@ -284,8 +272,6 @@ export default function Dashboard() {
 
       recorder.onerror = (event: Event) => {
         console.error("MediaRecorder error:", event);
-        setError(`An error occurred during recording: ${(event as any)?.error?.message || 'Unknown error'}`);
-        cleanupAudio();
         setIsRecording(false);
         setShowRecordingModal(false);
         setIsProcessing(false);
@@ -296,8 +282,7 @@ export default function Dashboard() {
       setShowRecordingModal(true);
     } catch (err) {
       console.error("Could not start recording:", err);
-      setError("Could not start recording. Please ensure your microphone is connected and permissions are granted.");
-      cleanupAudio();
+      setIsRecording(false);
     }
   };
 
@@ -314,12 +299,10 @@ export default function Dashboard() {
 
   const sendAudioToBackend = (blob: Blob) => {
     if (!blob) {
-      setError("No audio data captured.");
       return;
     }
 
     setIsProcessing(true);
-    setError(null);
     setPredictionResult(null);
 
     console.log("Simulating backend processing with progressive increase...");
@@ -365,7 +348,6 @@ export default function Dashboard() {
       } catch (err) {
         // Handle potential errors during simulation (less likely here)
         console.error("Error during simulation:", err);
-        setError("An unexpected error occurred during analysis simulation.");
         setPredictionResult(null);
       } finally {
         setIsProcessing(false); // Stop processing indicator
@@ -378,12 +360,10 @@ export default function Dashboard() {
     if (audioBlob && !isProcessing) {
       sendAudioToBackend(audioBlob);
     }
-  }, [audioBlob]);
+  }, [audioBlob, isProcessing, sendAudioToBackend]);
 
   useEffect(() => {
-    let processed = false;
     if (predictionResult !== null && !isChartLoading && chartData !== null) {
-      processed = true;
       console.log("--- Bayesian Update Cycle ---");
       console.log("Input Probability (p):", predictionResult.toFixed(3));
 
@@ -456,16 +436,6 @@ export default function Dashboard() {
               </span>
             </div>
           </div>
-
-          {error && (
-            <div className="mb-6 p-4 bg-red-100 border border-red-300 text-red-800 rounded-lg">
-              <p className="font-medium">Error:</p>
-              <p>{error}</p>
-              {permissionStatus === 'denied' && (
-                <p className="text-sm mt-1">You may need to adjust permissions in your browser&apos;s site settings and refresh the page.</p>
-              )}
-            </div>
-          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-5 space-y-6">
