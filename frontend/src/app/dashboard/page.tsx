@@ -95,7 +95,7 @@ export default function Dashboard() {
       let recorder: MediaRecorder;
       try {
         recorder = new MediaRecorder(stream, options);
-      } catch (e) {
+      } catch {
         recorder = new MediaRecorder(stream);
       }
       mediaRecorderRef.current = recorder;
