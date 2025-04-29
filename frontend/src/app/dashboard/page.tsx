@@ -174,6 +174,7 @@ export default function Dashboard() {
       let message = "Failed to process audio. Please try again.";
       if (err instanceof Error) {
         if (err.message.includes('Failed to fetch')) {
+          // eslint-disable-next-line react/no-unescaped-entities
           message = "Could not connect to the analysis server. Please ensure it's running and accessible.";
         } else {
           message = err.message;
